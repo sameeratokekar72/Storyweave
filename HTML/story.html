@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\style.css">
+    <script src="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\app.js"></script>
+    <script>
+        function loadStory() {
+            const storyId = parseInt(new URLSearchParams(window.location.search).get('id'));
+            const story = getStories().find(s => s.id === storyId);
+
+            if (!story) {
+                document.body.innerHTML = '<h1>Story not found.</h1>';
+                return;
+            }
+
+            document.getElementById('story-title').innerText = story.title;
+            document.getElementById('story-body').innerText = story.body;
+            document.getElementById('story-meta').innerText = `Genre: ${story.genre} | Author: ${story.author} | Likes: ${story.likes}`;
+
+            const commentsContainer = document.getElementById('comments');
+            story.comments.forEach(c => {
+                commentsContainer.innerHTML += `<p><strong>${c.author}</strong>: ${c.text}</p>`;
+            });
+        }
+
+        function submitComment(event) {
+            event.preventDefault();
+            const storyId = parseInt(new URLSearchParams(window.location.search).get('id'));
+            addComment(storyId, document.getElementById('comment').value);
+            window.location.reload();
+        }
+
+        window.onload = loadStory;
+    </script>
+</head>
+
+<p class="likes-count" id="story-likes"></p>
+<button onclick="likeCurrentStory()">👍 Like</button>
+
+<body>
+    <h1 id="story-title"></h1>
+    <p id="story-body"></p>
+    <p id="story-meta"></p>
+    <form onsubmit="submitComment(event)">
+        <input id="comment" placeholder="Add a comment" required>
+        <button type="submit">Comment</button>
+    </form>
+    <div id="comments"></div>
+</body>
+
+</html>

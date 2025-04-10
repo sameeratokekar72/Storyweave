@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<audio id="bg-music" autoplay loop>
+    <source src="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\Attack.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+
+<head>
+    <link rel="stylesheet" href="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\style.css">
+    <script src="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\app.js"></script>
+    <script>
+        function submitStory(event) {
+            event.preventDefault();
+            addStory(
+                document.getElementById('title').value,
+                document.getElementById('body').value,
+                document.getElementById('genre').value
+            );
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Submit Story</h1>
+    <form onsubmit="submitStory(event)">
+        <input id="title" placeholder="Title" required><br>
+        <textarea id="body" placeholder="Story" required></textarea><br>
+        <select id="genre">
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Romance">Romance</option>
+            <option value="Horror">Horror</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Historical">Historical</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+        </select><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

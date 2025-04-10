@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\style.css">
+    <script src="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\app.js"></script>
+    <script>
+        function loadProfile() {
+            const author = new URLSearchParams(window.location.search).get('author');
+            const stories = getStories().filter(s => s.author === author);
+            const container = document.getElementById('profile-stories');
+
+            stories.forEach(story => {
+                container.innerHTML += `<div class="story-card">
+                    <h2><a href="story.html?id=${story.id}">${story.title}</a></h2>
+                    <p>Genre: ${story.genre} | Likes: ${story.likes}</p>
+                </div>`;
+            });
+
+            document.getElementById('profile-header').innerText = `${author}'s Stories`;
+        }
+
+        window.onload = loadProfile;
+    </script>
+</head>
+
+<body>
+    <h1 id="profile-header"></h1>
+    <div id="profile-stories"></div>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<button onclick="startBackgroundMusic()">🎵 Play our background music for best focus (refresh page to stop)</button>
+<audio id="bg-music" loop>
+    <source src="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\Lachrymose.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+
+<h1>Welcome to StoryWeave</h1>
+
+<head>
+    <link rel="stylesheet" href="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\style.css">
+    <script src="C:\Users\Elvis Varghese\Downloads\newbiethon\assets\app.js"></script>
+    <script>
+        function loadStories() {
+            const stories = getStories();
+            const container = document.getElementById('story-list');
+            container.innerHTML = '';
+            stories.forEach(story => {
+                container.innerHTML += `
+                    <div class="story-card">
+                        <h2><a href="story.html?id=${story.id}">${story.title}</a></h2>
+                        <p>Genre: ${story.genre} | Author: <a href="profile.html?author=${story.author}">${story.author}</a> | Likes: ${story.likes}</p>
+                    </div>`;
+            });
+        }
+        window.onload = loadStories;
+    </script>
+</head>
+
+<body>
+    <nav id="main-nav">
+
+        <div style="margin: 15px;">
+            <label for="genre-filter">Filter by Genre:</label>
+            <select id="genre-filter" onchange="filterStories()">
+                <option value="">All Genres</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Fantasy">Fantasy</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Romance">Romance</option>
+                <option value="Horror">Horror</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Historical">Historical</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+            </select>
+        </div>
+
+        <div id="story-list"></div>
+
+    </nav>
+
+    <div style="margin: 15px;">
+        <label for="genre-filter">Filter by Genre:</label>
+        <select id="genre-filter" onchange="filterStories()">
+            <option value="">All Genres</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Romance">Romance</option>
+            <option value="Horror">Horror</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Historical">Historical</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+        </select>
+    </div>
+
+    <div id="story-list"></div>
+
+    <script>
+        renderStories();  
+    </script>
+
+
+    <script>
+        function updateNavbar() {
+            const user = getCurrentUser();
+            const nav = document.getElementById('main-nav');
+            nav.innerHTML = `
+                <a href="index.html">Home</a>
+                ${user ? `
+                    <a href="submit.html">Submit Story</a>
+                    <a href="profile.html?author=${user}">My Profile</a>
+                    <a href="#" onclick="logoutUser()">Logout</a>
+                ` : `
+                    <a href="login.html">Login</a>
+                    <a href="signup.html">Sign Up</a>
+                `}
+            `;
+        }
+
+        updateNavbar();
+    </script>
+
+    <div id="story-list"></div>
+
+    <!-- <div class="info-box" textalign="left">
+        <p> Stories are more than words on a page—they are the echoes of distant voices, the footprints of forgotten
+            dreams, and the blueprints of worlds yet to be imagined. In every tale, whether whispered in the hush of old
+            libraries or glowing on digital screens, there lies a spark—one that can ignite revolutions, mend broken
+            hearts, or simply remind us that we are not alone in the vast, intricate narrative of existence. </p>
+    </div> -->
+
+</body>
+
+</html>
